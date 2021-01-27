@@ -74,10 +74,10 @@ void addButton(CBlob@ caller, NuMenu::MenuButton@ button)
     button.Tick(caller.getPosition());//Tick button once to initially set the button state. For example if the button is out of range this will instantly tell the button to be greyed. Without this the button with be normal for a tick.
 
     array<NuMenu::MenuButton@>@ buttons;//Init array.
-    getRules().get("CustomButtons", @buttons);//Grab array.
+    getRules().get("NuButtons", @buttons);//Grab array.
     if(buttons == null)
     {
-        error("Tried to add button when CustomButtons array was null.");
+        error("Tried to add button when NuButtons array was null.");
         return;
     }
         buttons.push_back(button);//Put button in CustomButtons array.
