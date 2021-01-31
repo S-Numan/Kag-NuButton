@@ -65,8 +65,8 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
     }
     
 	
-    NuMenu::MenuButton@ button = NuMenu::MenuButton("", this);//Name of the button, and the button's owner. The button will automatically follow the owner unless specified not to.
-    initButton(button);//Sets up things easily.
+    //Create the button
+    NuMenu::MenuButton@ button = CreateButton(this);//The button's owner. The button will automatically follow the owner unless specified not to.
 
     button.enableRadius = this.get_u8("shop button radius");
 

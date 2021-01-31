@@ -2,7 +2,6 @@
 
 #include "LootCommon.as";
 #include "GenericButtonCommon.as";
-#include "NuMenuCommon.as";
 
 void onInit(CBlob@ this)
 {
@@ -60,28 +59,22 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
     {
         return;
     }
-	
-    NuMenu::MenuButton@ button = NuMenu::MenuButton("", this);//Name of the button, and the button's owner. The button will automatically follow the owner unless specified not to.
-    initButton(button);//Sets up things easily.
-
-    
-    setText(button, getTranslatedString("Open"));//The text on the button.
-
-    //Icon
-    addIcon(button,//Button.
-        "GUI/InteractionIcons.png",//Image name
-        Vec2f(32, 32),//Icon frame size
-        13,//Default frame
-        13,//Hover frame 
-        13//Pressing frame
-    );
 
     CBitStream params;
 	params.write_u16(caller.getNetworkID());
-    button.params = params;
-    button.setCommandID("activate");
 
-    addButton(caller, button);
+	//Sets up things easily.
+    CreateButtonFull(this,//The blob this button will follow. 
+        caller,//The player blob.
+        getTranslatedString("Open"),//The text on the button.
+        "GUI/InteractionIcons.png",//File name
+        Vec2f(32, 32),//Icon frame size
+        13,//Default frame
+        13,//Hover frame 
+        13,//Pressing frame
+        "activate",//Command ID
+        params//Params
+    );
 }
 
 void onCommand(CBlob@ this, u8 cmd, CBitStream @params)

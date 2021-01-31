@@ -130,8 +130,8 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
 
 		if (inv.getItemsCount() > 0)
 		{
-            NuMenu::MenuButton@ button = NuMenu::MenuButton("", this);//Name of the button, and the button's owner. The button will automatically follow the owner unless specified not to.
-            initButton(button);//Sets up things easily.
+            //Create the button
+            NuMenu::MenuButton@ button = CreateButton(this);//The button's owner. The button will automatically follow the owner unless specified not to.
 
             button.setOffset(Vec2f(-16, 0));
 

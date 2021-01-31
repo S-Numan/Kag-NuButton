@@ -38,24 +38,17 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
         return;
     }
 	
-    NuMenu::MenuButton@ button = NuMenu::MenuButton("", this);//Name of the button, and the button's owner. The button will automatically follow the owner unless specified not to.
-    initButton(button);//Sets up things easily.
-
-    
-    setText(button, getTranslatedString("Turn Saw " + (getSawOn(this) ? "Off" : "On")));//The text on the button.
-
-    //Icon
-    addIcon(button,//Button.
-        "GUI/InteractionIcons.png",//Image name
+    //Sets up things easily.
+    CreateButtonFull(this,//The blob this button will follow. 
+        caller,//The player blob.
+        getTranslatedString("Turn Saw " + (getSawOn(this) ? "Off" : "On")),//The text on the button.
+        "GUI/InteractionIcons.png",//File name
         Vec2f(32, 32),//Icon frame size
         8,//Default frame
         8,//Hover frame 
-        8//Pressing frame
+        8,//Pressing frame
+        toggle_id//Command ID
     );
-
-    button.setCommandID(toggle_id);//This command will be sent to this blob when this button is pressed.
-
-    addButton(caller, button);
 }
 
 void onCommand(CBlob@ this, u8 cmd, CBitStream @params)

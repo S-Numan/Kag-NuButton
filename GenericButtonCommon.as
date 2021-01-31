@@ -20,8 +20,55 @@ bool canSeeButtons(CBlob@ this, CBlob@ caller, bool team_only = false, f32 max_d
 	);
 }
 
-void initButton(NuMenu::MenuButton@ button)
+//Does all that is usually needed when creating a button.
+NuMenu::MenuButton@ CreateButtonFull(CBlob@ owner, CBlob@ caller, string text, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame)
 {
+    NuMenu::MenuButton@ button = CreateButton(owner);
+
+    setText(button, text);//The text on the button.
+
+    //Icon
+    addIcon(button,//Button.
+        icon_path,//Image name
+        icon_size,//Icon frame size
+        default_frame,//Default frame
+        hover_frame,//Hover frame 
+        pressing_frame//Pressing frame
+    );
+
+    addButton(caller, button);
+
+    return @button;
+}
+
+//Command id
+NuMenu::MenuButton@ CreateButtonFull(CBlob@ owner, CBlob@ caller, string text, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, u8 command_id, CBitStream params = CBitStream())
+{
+    NuMenu::MenuButton@ button = CreateButtonFull(owner, caller, text, icon_path, icon_size, default_frame, hover_frame, pressing_frame);
+
+    button.setCommandID(command_id);
+    if(params.Length() != 0)
+    {
+        button.params = params;    
+    }
+    return @button;
+}
+//Command string
+NuMenu::MenuButton@ CreateButtonFull(CBlob@ owner, CBlob@ caller, string text, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, string command_string, CBitStream params = CBitStream())
+{
+    NuMenu::MenuButton@ button = CreateButtonFull(owner, caller, text, icon_path, icon_size, default_frame, hover_frame, pressing_frame);
+    button.setCommandID(command_string);
+    if(params.Length() != 0)
+    {
+        button.params = params;    
+    }
+    return @button;
+}
+
+NuMenu::MenuButton@ CreateButton(CBlob@ this)
+{
+    NuMenu::MenuButton@ button = NuMenu::MenuButton("", this);//Name of the button, and the button's owner. The button will automatically follow the owner unless specified not to.
+
     //Debug
     //button.setSize(Vec2f(30,30));//Note as the start of a menu is the top left, unless compensated by setRelationPos, this will uncenter the button from the thing it's on.
     //button.setOffset(-(button.getSize() / 2));//Where the button is in relation to it's OwnerBlob. This should center the button directly on the blob.
@@ -67,6 +114,9 @@ void initButton(NuMenu::MenuButton@ button)
     icon.pos = icon_pos;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
+
+
+    return @button;
 }
 
 NuMenu::MenuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, u16 pos = 255)
