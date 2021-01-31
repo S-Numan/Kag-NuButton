@@ -243,6 +243,7 @@ void onRestart(CRules@ rules)
 
 void onReload( CRules@ rules )
 {
+    print("NuButton reloaded");
     onRestart(rules);
 }
 

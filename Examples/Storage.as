@@ -3,6 +3,7 @@
 // Storage.as
 
 #include "GenericButtonCommon.as"
+#include "NumanLib.as"
 
 void onInit(CSprite@ this)
 {
@@ -139,7 +140,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
             button.params = params;
             button.setCommandID("store inventory");
             
-            button.setText(getTranslatedString("Store"), NuMenu::POSUnder);//The text on the button.
+            button.setText(getTranslatedString("Store"), Nu::POSUnder);//The text on the button.
         
             //Icon
             NuMenu::MenuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
@@ -147,7 +148,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
                 28,//Default frame
                 28,//Hover frame 
                 28,//Pressing frame
-                NuMenu::POSCenter);//Image position
+                Nu::POSCenter);//Image position
             icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
         
             addButton(caller, button);

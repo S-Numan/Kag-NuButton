@@ -63,10 +63,52 @@ void initButton(NuMenu::MenuButton@ button)
         0);//Image position
 
     Vec2f icon_pos;
-    button.getDesiredPosOnSize(NuMenu::POSCenter, button.getSize(), icon.frame_size, button.default_buffer, icon_pos);
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.frame_size, icon_pos, button.default_buffer);
     icon.pos = icon_pos;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
+}
+
+NuMenu::MenuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, u16 pos = 255)
+{
+    if(pos == 255)//No pos set?
+    {
+        for(u16 i = 0; i < 255; i++)//For every pos.
+        {
+            if(button.getIcon(i) != null)//If this pos is set.
+            {
+                continue;//Next pos.
+            }
+            //Pos isn't set, this is an open pos.
+            pos = i;//This is our pos.
+            break;//Exit.
+        }
+    }
+
+    //Icon
+    NuMenu::MenuImage@ icon = button.setIcon(icon_path,//Image name
+        icon_size,//Icon frame size
+        default_frame,//Default frame
+        hover_frame,//Hover frame 
+        pressing_frame,//Pressing frame
+        pos);//Image position
+
+    Vec2f icon_pos;
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.frame_size, icon_pos, button.default_buffer);
+    icon.pos = icon_pos;
+
+    icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
+
+    return @icon;
+}
+
+void setText(NuMenu::MenuButton@ button, string text, u16 pos = 255)
+{
+    if(pos == 255)
+    {
+        pos = Nu::POSUnder;
+    }
+    button.setText(text, pos);
 }
 
 void addButton(CBlob@ caller, NuMenu::MenuButton@ button)

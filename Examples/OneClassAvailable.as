@@ -2,6 +2,7 @@
 
 #include "StandardRespawnCommand.as";
 #include "GenericButtonCommon.as";
+#include "NumanLib.as";
 
 const string req_class = "required class";
 
@@ -54,7 +55,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
 
         button.setOffset(_offset);
         
-        button.setText(getTranslatedString("Swap Class"), NuMenu::POSUnder);//The text on the button.
+        button.setText(getTranslatedString("Swap Class"), Nu::POSUnder);//The text on the button.
 
         //Icon
         NuMenu::MenuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
@@ -62,7 +63,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
             14,//Default frame
             14,//Hover frame 
             14,//Pressing frame
-            NuMenu::POSCenter);//Image position
+            Nu::POSCenter);//Image position
         icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 
         button.params = params;

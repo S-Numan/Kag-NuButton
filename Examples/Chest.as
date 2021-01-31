@@ -65,16 +65,16 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
     initButton(button);//Sets up things easily.
 
     
-    button.setText(getTranslatedString("Open"), NuMenu::POSUnder);//The text on the button.
+    setText(button, getTranslatedString("Open"));//The text on the button.
 
     //Icon
-    NuMenu::MenuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
+    addIcon(button,//Button.
+        "GUI/InteractionIcons.png",//Image name
         Vec2f(32, 32),//Icon frame size
         13,//Default frame
         13,//Hover frame 
-        13,//Pressing frame
-        NuMenu::POSCenter);//Image position
-    icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
+        13//Pressing frame
+    );
 
     CBitStream params;
 	params.write_u16(caller.getNetworkID());

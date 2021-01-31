@@ -8,6 +8,7 @@
 #include "MakeCrate.as"
 #include "CheckSpam.as"
 #include "GenericButtonCommon.as"
+#include "NumanLib.as"
 
 void onInit(CBlob@ this)
 {
@@ -71,7 +72,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
 
     button.setOffset(_offset);
     
-    button.setText(getTranslatedString(this.get_string("shop description")), NuMenu::POSUnder);//The text on the button.
+    button.setText(getTranslatedString(this.get_string("shop description")), Nu::POSUnder);//The text on the button.
 
 
     u8 icon_frame = this.get_u8("shop icon");
@@ -82,7 +83,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
         icon_frame,//Default frame
         icon_frame,//Hover frame 
         icon_frame,//Pressing frame
-        NuMenu::POSCenter);//Image position
+        Nu::POSCenter);//Image position
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 
     button.addReleaseListener(@delayedCreateMenu);
