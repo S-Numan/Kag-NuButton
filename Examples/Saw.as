@@ -2,7 +2,6 @@
 
 #include "Hitters.as"
 #include "GenericButtonCommon.as"
-#include "NuMenuCommon.as";
 
 const string toggle_id = "toggle_power";
 const string sawteammate_id = "sawteammate";

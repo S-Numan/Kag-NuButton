@@ -143,7 +143,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
             button.setText(getTranslatedString("Store"), Nu::POSUnder);//The text on the button.
         
             //Icon
-            NuMenu::MenuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
+            Nu::NuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
                 Vec2f(32, 32),//Icon frame size
                 28,//Default frame
                 28,//Hover frame 

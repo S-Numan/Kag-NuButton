@@ -75,7 +75,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     //button.setInterpolated(false);
 
     //MISC
-    button.setRenderBackground(false);//Just in case this tries to render, stop it. This is more for preventing legacy code from doing a bad.
+    button.setRenderBackground(false);//Just in case this tries to render, stop it.
     button.kill_on_release = true;//Changes whether the button will be removed when it is pressed.(released) (logic for this happens outside the button class).
     button.instant_press = true;//Button command/script is sent/called upon just pressing.
     button.enableRadius = 36.0f;//How close you have to be to press the button. Out of this distance the button is greyed out and unpressable.
@@ -102,7 +102,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     button.play_sound_on_world = false;//This changes whether the sound is 2d or the sound is played on a point in the world.
 
     //Icon
-    NuMenu::MenuImage@ icon = button.setIcon("GUI/InteractionIconsBackground.png",//Image name
+    Nu::NuImage@ icon = button.setIcon("GUI/InteractionIconsBackground.png",//Image name
         Vec2f(32, 32),//Icon frame size
         0,//Default frame
         1,//Hover frame 
@@ -110,7 +110,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
         0);//Image position
 
     Vec2f icon_pos;
-    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.frame_size, icon_pos, button.default_buffer);
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_pos, button.default_buffer);
     icon.pos = icon_pos;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
@@ -119,7 +119,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     return @button;
 }
 
-NuMenu::MenuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, u16 pos = 255)
+Nu::NuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, u16 pos = 255)
 {
     if(pos == 255)//No pos set?
     {
@@ -136,7 +136,7 @@ NuMenu::MenuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f i
     }
 
     //Icon
-    NuMenu::MenuImage@ icon = button.setIcon(icon_path,//Image name
+    Nu::NuImage@ icon = button.setIcon(icon_path,//Image name
         icon_size,//Icon frame size
         default_frame,//Default frame
         hover_frame,//Hover frame 
@@ -144,7 +144,7 @@ NuMenu::MenuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f i
         pos);//Image position
 
     Vec2f icon_pos;
-    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.frame_size, icon_pos, button.default_buffer);
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_pos, button.default_buffer);
     icon.pos = icon_pos;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.

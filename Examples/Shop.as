@@ -78,7 +78,7 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
     u8 icon_frame = this.get_u8("shop icon");
 
     //Icon
-    NuMenu::MenuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
+    Nu::NuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
         Vec2f(32, 32),//Icon frame size
         icon_frame,//Default frame
         icon_frame,//Hover frame 
