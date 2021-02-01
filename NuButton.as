@@ -94,10 +94,22 @@ void onTick( CRules@ rules )
             {
                 error("how");
                 continue;
-            }    
+            }
+            Vec2f blob_pos;
+            Vec2f mouse_pos;
+            if(buttons[i].isWorldPos())//World pos
+            {
+                blob_pos = blob.getPosition();
+                mouse_pos = controls.getMouseWorldPos();
+            }
+            else//Screen pos
+            {
+                blob_pos = blob.getScreenPos();
+                mouse_pos = controls.getMouseScreenPos();
+            }
             
             if(e_key_release){buttons[i].initial_press = true;}
-            buttons[i].Tick(KEY, controls.getMouseScreenPos(), blob.getPosition());
+            buttons[i].Tick(KEY, mouse_pos, blob_pos);
 
             //Text
             if(buttons[i].getMenuState() == NuMenu::Hover || buttons[i].getMenuState() == NuMenu::JustHover)
@@ -173,7 +185,7 @@ void onTick( CRules@ rules )
 
             for(j = 0; j < N; j++)
             {
-                distances[j] = NuMenu::getDistance(blob.getPosition(), buttons[j].getMiddle(true));
+                distances[j] = NuMenu::getDistance(blob.getPosition(), buttons[j].getMiddle());
             }
             if(buttons.size() != 1)//No need to sort through a single button 
             {

@@ -81,7 +81,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     button.enableRadius = 36.0f;//How close you have to be to press the button. Out of this distance the button is greyed out and unpressable.
 
     //Position
-    button.setIsWorldPos(true);//This button is on the world.
+    button.setIsWorldPos(false);//This button is on the world.
 
     //Collision
     button.setRadius(16.0f);//Radius of button. The collision circle of the button.
