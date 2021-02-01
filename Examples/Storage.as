@@ -130,28 +130,24 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
 
 		if (inv.getItemsCount() > 0)
 		{
-            //Create the button
-            NuMenu::MenuButton@ button = CreateButton(this);//The button's owner. The button will automatically follow the owner unless specified not to.
-
-            button.setOffset(Vec2f(-16, 0));
 
             CBitStream params;
             params.write_u16(caller.getNetworkID());
-            button.params = params;
-            button.setCommandID("store inventory");
-            
-            button.setText(getTranslatedString("Store"), Nu::POSUnder);//The text on the button.
-        
-            //Icon
-            Nu::NuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
+
+            //Sets up things easily.
+            NuMenu::MenuButton@ button = CreateButtonFull(this,//The blob this button will follow. 
+                caller,//The player blob.
+                getTranslatedString("Store"),//The text on the button.
+                "GUI/InteractionIcons.png",//File name
                 Vec2f(32, 32),//Icon frame size
                 28,//Default frame
                 28,//Hover frame 
                 28,//Pressing frame
-                Nu::POSCenter);//Image position
-            icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
-        
-            addButton(caller, button);
+                "store inventory",//Command ID
+                params//Params
+            );
+            
+            button.setOffset(Vec2f(-16, 0));
         }
 	}
 }

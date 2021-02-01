@@ -50,26 +50,19 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
 		CBitStream params;
 		write_classchange(params, caller.getNetworkID(), cfg);
 
-		//Create the button
-        NuMenu::MenuButton@ button = CreateButton(this);//The button's owner. The button will automatically follow the owner unless specified not to.
-
-        button.setOffset(_offset);
-        
-        button.setText(getTranslatedString("Swap Class"), Nu::POSUnder);//The text on the button.
-
-        //Icon
-        Nu::NuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
+        //Sets up things easily.
+        NuMenu::MenuButton@ button = CreateButtonFull(this,//The blob this button will follow. 
+            caller,//The player blob.
+            getTranslatedString("Swap Class"),//The text on the button.
+            "GUI/InteractionIcons.png",//File name
             Vec2f(32, 32),//Icon frame size
             14,//Default frame
             14,//Hover frame 
             14,//Pressing frame
-            Nu::POSCenter);//Image position
-        icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
-
-        button.params = params;
-        button.setCommandID(SpawnCmd::changeClass);//This command will be sent to this blob when this button is pressed.
-
-        addButton(caller, button);
+            SpawnCmd::changeClass,//Command ID
+            params//Params
+        );
+        button.setOffset(_offset);
 
 		button.enableRadius = this.get_u8("class button radius");
 	}

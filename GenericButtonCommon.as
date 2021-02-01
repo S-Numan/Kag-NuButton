@@ -81,10 +81,10 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     button.enableRadius = 36.0f;//How close you have to be to press the button. Out of this distance the button is greyed out and unpressable.
 
     //Position
-    button.setIsWorldPos(false);//This button is on the world.
+    button.setIsWorldPos(true);//This button is on the world.
 
     //Collision
-    button.setRadius(16.0f);//Radius of button. The collision circle of the button.
+    button.setRadius(8.0f);//Radius of button. The collision circle of the button.
     button.setCollisionLowerRight(Vec2f(0,0));//Removes the collision box. In most cases.
     button.setCollisionSetter(false);//By default, the button uses a collision box for collisions, not a radius. After changing the collision box, this will prevent the button from changing the collision box back to it's own size again.
 
@@ -102,16 +102,16 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     button.play_sound_on_world = false;//This changes whether the sound is 2d or the sound is played on a point in the world.
 
     //Icon
-    Nu::NuImage@ icon = button.setIcon("GUI/InteractionIconsBackground.png",//Image name
+    Nu::NuImage@ icon = button.setImage("GUI/InteractionIconsBackground.png",//Image name
         Vec2f(32, 32),//Icon frame size
         0,//Default frame
         1,//Hover frame 
         1,//Pressing frame
         0);//Image position
 
-    Vec2f icon_pos;
-    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_pos, button.default_buffer);
-    icon.pos = icon_pos;
+    Vec2f icon_offset;
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_offset, button.default_buffer);
+    icon.offset = icon_offset;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 
@@ -125,7 +125,7 @@ Nu::NuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_si
     {
         for(u16 i = 0; i < 255; i++)//For every pos.
         {
-            if(button.getIcon(i) != null)//If this pos is set.
+            if(button.getImage(i) != null)//If this pos is set.
             {
                 continue;//Next pos.
             }
@@ -136,16 +136,16 @@ Nu::NuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_si
     }
 
     //Icon
-    Nu::NuImage@ icon = button.setIcon(icon_path,//Image name
+    Nu::NuImage@ icon = button.setImage(icon_path,//Image name
         icon_size,//Icon frame size
         default_frame,//Default frame
         hover_frame,//Hover frame 
         pressing_frame,//Pressing frame
         pos);//Image position
 
-    Vec2f icon_pos;
-    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_pos, button.default_buffer);
-    icon.pos = icon_pos;
+    Vec2f icon_offset;
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_offset, button.default_buffer);
+    icon.offset = icon_offset;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 

@@ -63,32 +63,24 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
     {
         _offset.x *= 2;
     }
-    
-	
-    //Create the button
-    NuMenu::MenuButton@ button = CreateButton(this);//The button's owner. The button will automatically follow the owner unless specified not to.
-
-    button.enableRadius = this.get_u8("shop button radius");
-
-    button.setOffset(_offset);
-    
-    button.setText(getTranslatedString(this.get_string("shop description")), Nu::POSUnder);//The text on the button.
-
 
     u8 icon_frame = this.get_u8("shop icon");
 
-    //Icon
-    Nu::NuImage@ icon = button.setIcon("GUI/InteractionIcons.png",//Image name
+    //Sets up things easily.
+    NuMenu::MenuButton@ button = CreateButtonFull(this,//The blob this button will follow. 
+        caller,//The player blob.
+        getTranslatedString(this.get_string("shop description")),//The text on the button.
+        "GUI/InteractionIcons.png",//File name
         Vec2f(32, 32),//Icon frame size
         icon_frame,//Default frame
         icon_frame,//Hover frame 
-        icon_frame,//Pressing frame
-        Nu::POSCenter);//Image position
-    icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
+        icon_frame//Pressing frame
+    );
+    button.setOffset(_offset);
+
+    button.enableRadius = this.get_u8("shop button radius");
 
     button.addReleaseListener(@delayedCreateMenu);
-
-    addButton(caller, button);
 }
 
 void onTick(CBlob@ this)
