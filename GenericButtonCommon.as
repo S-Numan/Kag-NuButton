@@ -103,7 +103,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     //Text
     button.draw_text = false;//Don't initially draw text.
     //button.reposition_text = false;//Make sure the text is constantly under the button in the correct position when drawing.//Not required.
-    button.default_buffer = 8.0f;//Buffer between bottom of the button and the text. Provided there is text.
+    button.default_buffer = 6.0f;//Buffer between bottom of the button and the text. Provided there is text.
 
     //Sound
     button.menu_sounds_on[NuMenu::JustHover] = "select.ogg";//Button sound played upon just hovering over the button.
@@ -171,7 +171,7 @@ void setText(NuMenu::MenuButton@ button, string _text, u8 pos = 255)
 
     NuText@ text = button.setText(_text, pos);
 
-    text.setScale(0.1f);//False prevents the text from scaling
+    text.setScale(0.135f);//Scale of text.
 
     text.setColor(SColor(255, 255, 255, 255));//The color of the text of the button of the blob of the game of the computer of the screen
     
