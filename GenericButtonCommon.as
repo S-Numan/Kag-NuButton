@@ -65,6 +65,17 @@ NuMenu::MenuButton@ CreateButtonFull(CBlob@ owner, CBlob@ caller, string text, s
     }
     return @button;
 }
+//Function
+NuMenu::MenuButton@ CreateButtonFull(CBlob@ owner, CBlob@ caller, string text, string icon_path, Vec2f icon_size, u16 default_frame, u16 hover_frame, u16 pressing_frame, NuMenu::RELEASE_CALLBACK_OWNER@ func, CBitStream params = CBitStream())
+{
+    NuMenu::MenuButton@ button = CreateButtonFull(owner, caller, text, icon_path, icon_size, default_frame, hover_frame, pressing_frame);
+    button.addReleaseListener(@func);
+    if(params.Length() != 0)
+    {
+        button.params = params;    
+    }
+    return @button;
+}
 
 NuMenu::MenuButton@ CreateButton(CBlob@ this)
 {
