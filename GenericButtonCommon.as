@@ -1,4 +1,5 @@
 #include "NuMenuCommon.as";
+#include "NuTextCommon.as";
 
 bool canSeeButtons(CBlob@ this, CBlob@ caller, bool team_only = false, f32 max_distance = 9999.0f)
 {
@@ -90,10 +91,8 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
 
     //Text
     button.draw_text = false;//Don't initially draw text.
-    button.reposition_text = true;//Make sure the text is constantly under the button in the correct position when drawing.
-    button.default_buffer = 12.0f;//Buffer between bottom of the button and the text. Provided there is text.
-    button.setTextColor(SColor(255, 255, 255, 255));//The color of the text of the button of the blob of the game of the computer of the screen
-    //button.setFont("AveriaSerif-Regular1", 16);//debug todo
+    //button.reposition_text = false;//Make sure the text is constantly under the button in the correct position when drawing.//Not required.
+    button.default_buffer = 8.0f;//Buffer between bottom of the button and the text. Provided there is text.
 
     //Sound
     button.menu_sounds_on[NuMenu::JustHover] = "select.ogg";//Button sound played upon just hovering over the button.
@@ -152,13 +151,22 @@ Nu::NuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_si
     return @icon;
 }
 
-void setText(NuMenu::MenuButton@ button, string text, u16 pos = 255)
+void setText(NuMenu::MenuButton@ button, string _text, u8 pos = 255)
 {
     if(pos == 255)
     {
         pos = Nu::POSUnder;
     }
-    button.setText(text, pos);
+
+    NuText@ text = button.setText(_text, pos);
+
+    text.setScale(0.1f);//False prevents the text from scaling
+
+    text.setColor(SColor(255, 255, 255, 255));//The color of the text of the button of the blob of the game of the computer of the screen
+    
+    text.setFont("Calibri-Bold");//The font of the text.
+
+    button.RepositionText(button.getSize(), pos);
 }
 
 void addButton(CBlob@ caller, NuMenu::MenuButton@ button)

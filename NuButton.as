@@ -1,7 +1,7 @@
 #include "NuMenuCommon.as";
 
 //TODO
-//1. Figure out how to outline selected blobs.
+//1. Figure out how to outline selected blobs better.
 //2. Button appears behind things when you are also holding c to pick them up. Fix this. (remaking the rendering system would probably work).
 
 
@@ -185,7 +185,7 @@ void onTick( CRules@ rules )
 
             for(j = 0; j < N; j++)
             {
-                distances[j] = NuMenu::getDistance(blob.getPosition(), buttons[j].getMiddle());
+                distances[j] = Nu::getDistance(blob.getPosition(), buttons[j].getMiddle());
             }
             if(buttons.size() != 1)//No need to sort through a single button 
             {
