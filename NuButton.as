@@ -1,4 +1,5 @@
 #include "NuMenuCommon.as";
+#include "NuHub.as";
 
 //TODO
 //1. Figure out how to outline selected blobs better.
@@ -9,6 +10,7 @@ u16 QUICK_PICK = 7;//Quickly tap e and let go before QUICK_PICK ticks pass to pi
 float QUICK_PICK_MAX_RANGE = 26.0f;
 
 array<NuMenu::MenuButton@>@ buttons;
+NuHub@ hub = @null;
 
 bool init = false;
 void onInit( CRules@ rules )
@@ -17,7 +19,8 @@ void onInit( CRules@ rules )
     {
         return;
     }
-    init = true;
+
+    if(!rules.get("NuHub", @hub)) { error("Failed to get NuHub. Make sure NuHubLogic is before anything else that tries to use NuHub."); return; }
 
     array<NuMenu::MenuButton@> _buttons = array<NuMenu::MenuButton@>();
     @buttons = @_buttons;
@@ -26,6 +29,8 @@ void onInit( CRules@ rules )
     //namehashes.push_back(_menus[i].getNameHash());
 
     rules.set("NuButtons", @buttons);   
+    
+    init = true;
 }
 
 
@@ -53,6 +58,9 @@ void onTick( CRules@ rules )
         buttons.clear();
         return;
     }
+
+
+
     CBlob@ blob = player.getBlob();
     
     bool e_key_release = false; 
@@ -232,21 +240,19 @@ void onTick( CRules@ rules )
     {
         buttons.clear();
     }
-}
 
-void onRender( CRules@ rules )
-{   
-    if(!init){return;}
-
+    //Rendering
     for(u16 i = 0; i < buttons.size(); i++)
     {
         if(buttons[i] == null)
         {
             continue;
         }
-        buttons[i].Render();
+        hub.RenderImage(buttons[i].getRenderLayer(), buttons[i].getRenderFunction());
     }
+    //Rendering
 }
+
 
 void onRestart(CRules@ rules)
 {
