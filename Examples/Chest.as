@@ -70,8 +70,8 @@ void GetButtonsFor(CBlob@ this, CBlob@ caller)
         "GUI/InteractionIcons.png",//File name
         Vec2f(32, 32),//Icon frame size
         13,//Default frame
-        13,//Hover frame 
-        13,//Pressing frame
+        20,//Hover frame 
+        20,//Pressing frame
         "activate",//Command ID
         params//Params
     );

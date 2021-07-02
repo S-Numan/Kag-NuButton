@@ -20,7 +20,7 @@ void onInit( CRules@ rules )
         return;
     }
 
-    if(!rules.get("NuHub", @hub)) { error("Failed to get NuHub. Make sure NuHubLogic is before anything else that tries to use NuHub."); return; }
+    if(!rules.get("NuHub", @hub)) { error("Failed to get NuHub. Make sure NuToolsLogic is before anything else that tries to use NuHub."); return; }
 
     array<NuMenu::MenuButton@> _buttons = array<NuMenu::MenuButton@>();
     @buttons = @_buttons;

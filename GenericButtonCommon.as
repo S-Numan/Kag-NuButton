@@ -112,7 +112,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     button.play_sound_on_world = false;//This changes whether the sound is 2d or the sound is played on a point in the world.
 
     //Icon
-    Nu::NuImage@ icon = button.setImage("GUI/InteractionIconsBackground.png",//Image name
+    Nu::NuStateImage@ icon = button.setImage("GUI/InteractionIconsBackground.png",//Image name
         Vec2f(32, 32),//Icon frame size
         0,//Default frame
         1,//Hover frame 
@@ -146,7 +146,7 @@ Nu::NuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_si
     }
 
     //Icon
-    Nu::NuImage@ icon = button.setImage(icon_path,//Image name
+    Nu::NuStateImage@ icon = button.setImage(icon_path,//Image name
         icon_size,//Icon frame size
         default_frame,//Default frame
         hover_frame,//Hover frame 
