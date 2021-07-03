@@ -95,54 +95,79 @@ void onTick( CRules@ rules )
         {
             KEY = KEY_LBUTTON;
         }
-        
+
+        if(buttons.size() != 0)//Provided there is more than one button.
+        {
+            i = buttons.size();
+            while(i > 0)//Tick buttons, then remove buttons if their owner_blobs are dead.
+            {
+                i--;
+                if(buttons[i] == null)
+                {
+                    error("how");
+                    continue;
+                }
+
+                Vec2f blob_pos;
+                Vec2f mouse_pos;
+                if(buttons[i].isWorldPos())//World pos
+                {
+                    blob_pos = blob.getPosition();
+                    mouse_pos = controls.getMouseWorldPos();
+                }
+                else//Screen pos
+                {
+                    blob_pos = blob.getScreenPos();
+                    mouse_pos = controls.getMouseScreenPos();
+                }
+                
+                if(e_key_release){buttons[i].initial_press = true;}
+                buttons[i].Tick(KEY, mouse_pos, blob_pos);
+
+
+                if(buttons[i].getOwnerBlob() == @null)
+                {
+                    buttons.removeAt(i);
+                }
+            }
+        }
+
         for(i = 0; i < buttons.size(); i++)
         {
+            
             if(buttons[i] == null)
             {
                 error("how");
                 continue;
             }
-            Vec2f blob_pos;
-            Vec2f mouse_pos;
-            if(buttons[i].isWorldPos())//World pos
-            {
-                blob_pos = blob.getPosition();
-                mouse_pos = controls.getMouseWorldPos();
-            }
-            else//Screen pos
-            {
-                blob_pos = blob.getScreenPos();
-                mouse_pos = controls.getMouseScreenPos();
-            }
-            
-            if(e_key_release){buttons[i].initial_press = true;}
-            buttons[i].Tick(KEY, mouse_pos, blob_pos);
 
             //Text
             if(buttons[i].getMenuState() == NuMenu::Hover || buttons[i].getMenuState() == NuMenu::JustHover)
             {
                 buttons[i].draw_text = true;
                 
-                CBlob@ owner_blob = buttons[i].getOwnerBlob();
-                if(owner_blob != null)
+                CBlob@ owner_blob = @buttons[i].getOwnerBlob();
+                
+                if(owner_blob.getWidth() == 0.0f){ Nu::Error("Blob" + i + " is fake null"); continue; }//Can cause instant crashing if blob is destroyed, but not null because kag.
+
+                CSprite@ owner_sprite = @owner_blob.getSprite();
+                if(owner_sprite != @null)
                 {
-                    CSprite@ owner_sprite = owner_blob.getSprite();
-                    if(owner_sprite != null)
+                    if(owner_sprite.getFrameWidth() == 0.0f || owner_sprite.getFrameHeight() == 0.0f) { Nu::Error("blob sprite width and/or height were 0."); continue; }
+                    
+                    CSpriteLayer@ outline = @owner_sprite.getSpriteLayer("outli");
+                    if(outline == @null)//Outline not yet created (Happens once).
                     {
-                        CSpriteLayer@ outline = owner_sprite.getSpriteLayer("outli");
-                        if(outline == null)//Outline not yet created (Happens once).
-                        {
-                            CSpriteLayer@ _outline = owner_sprite.addSpriteLayer("outli", owner_sprite.getFilename(), owner_sprite.getFrameWidth(), owner_sprite.getFrameHeight(), owner_blob.getTeamNum(), 0);
-                            _outline.setRenderStyle(RenderStyle::outline);
-                            _outline.ScaleBy((owner_sprite.getFrameWidth() + 2.0f) / owner_sprite.getFrameWidth(), (owner_sprite.getFrameHeight() + 2.0f) / owner_sprite.getFrameHeight());
-                            _outline.SetRelativeZ(-0.01f);
-                            _outline.SetFrame(owner_sprite.getFrame());
-                        }
-                        else//Outline not null. (happens every tick after the first)
-                        {
-                            outline.SetFrame(owner_sprite.getFrame());
-                        }
+                        CSpriteLayer@ _outline = @owner_sprite.addSpriteLayer("outli", owner_sprite.getFilename(), owner_sprite.getFrameWidth(), owner_sprite.getFrameHeight(), owner_blob.getTeamNum(), 0);
+
+                        _outline.setRenderStyle(RenderStyle::outline);
+                        _outline.ScaleBy((owner_sprite.getFrameWidth() + 2.0f) / owner_sprite.getFrameWidth(), (owner_sprite.getFrameHeight() + 2.0f) / owner_sprite.getFrameHeight());
+                        _outline.SetRelativeZ(-0.01f);
+                        _outline.SetFrame(owner_sprite.getFrame());
+                    }
+                    else//Outline not null. (happens every tick after the first)
+                    {
+                        outline.SetFrame(owner_sprite.getFrame());
                     }
                 }
             }
@@ -169,12 +194,12 @@ void onTick( CRules@ rules )
             {
                 if(buttons[i].kill_on_release)
                 {
-                    buttons.removeAt(i);
                     if(e_key_release)
                     {
                         buttons.clear();
                         return;
                     }
+                    buttons.removeAt(i);
                 }
                 break;
             }
@@ -248,7 +273,9 @@ void onTick( CRules@ rules )
         {
             continue;
         }
+
         hub.RenderImage(buttons[i].getRenderLayer(), buttons[i].getRenderFunction());
+
     }
     //Rendering
 }
