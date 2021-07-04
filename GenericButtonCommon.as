@@ -89,6 +89,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     //MISC
     button.setRenderBackground(false);//Just in case this tries to render, stop it.
     button.kill_on_release = true;//Changes whether the button will be removed when it is pressed.(released) (logic for this happens outside the button class).
+    button.die_when_no_owner = true;//Kills the button if the owner blob is gone.
     button.instant_press = true;//Button command/script is sent/called upon just pressing.
     button.enableRadius = 36.0f;//How close you have to be to press the button. Out of this distance the button is greyed out and unpressable.
 
@@ -182,7 +183,8 @@ void setText(NuMenu::MenuButton@ button, string _text, u8 pos = 255)
 
 void addButton(CBlob@ caller, NuMenu::MenuButton@ button)
 {
-    button.Tick(caller.getPosition());//Tick button once to initially set the button state. For example if the button is out of range this will instantly tell the button to be greyed. Without this the button with be normal for a tick.
+    //button.Tick(caller.getPosition());//Tick button once to initially set the button state. For example if the button is out of range this will instantly tell the button to be greyed. Without this the button with be normal for a tick.
+    //button.setTicksSinceCreated(Nu::u32_max());
 
     array<NuMenu::MenuButton@>@ buttons;//Init array.
     getRules().get("NuButtons", @buttons);//Grab array.
@@ -191,5 +193,5 @@ void addButton(CBlob@ caller, NuMenu::MenuButton@ button)
         error("Tried to add button when NuButtons array was null.");
         return;
     }
-        buttons.push_back(button);//Put button in CustomButtons array.
+    buttons.push_back(button);//Put button in CustomButtons array.
 }

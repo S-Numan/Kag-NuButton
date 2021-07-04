@@ -98,10 +98,8 @@ void onTick( CRules@ rules )
 
         if(buttons.size() != 0)//Provided there is more than one button.
         {
-            i = buttons.size();
-            while(i > 0)//Tick buttons, then remove buttons if their owner_blobs are dead.
+            for(i = 0; i < buttons.size(); i++)//Tick buttons, then remove buttons if their owner_blobs are dead.
             {
-                i--;
                 if(buttons[i] == null)
                 {
                     error("how");
@@ -124,11 +122,14 @@ void onTick( CRules@ rules )
                 if(e_key_release){buttons[i].initial_press = true;}
                 buttons[i].Tick(KEY, mouse_pos, blob_pos);
 
-
-                if(buttons[i].getOwnerBlob() == @null)
+                if(buttons[i].getKillMenu() && buttons[i].getOwnerBlob() == @null)
                 {
-                    buttons.removeAt(i);
+                    buttons.removeAt(i);//Remove button
+                    i--;//Go one button back
+                    continue;//Next button
                 }
+                
+                buttons[i].PostTick();
             }
         }
 
