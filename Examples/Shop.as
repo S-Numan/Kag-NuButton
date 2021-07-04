@@ -111,8 +111,9 @@ void onTick(CBlob@ this)
 }
 
 
-void delayedCreateMenu(CPlayer@ caller, CBitStream params, NuMenu::IMenu@ menu, CBlob@ owner)
+void delayedCreateMenu(CPlayer@ caller, CBitStream@ params, NuMenu::IMenu@ menu, u16 key_code)
 {
+    CBlob@ owner = menu.getOwnerBlob();
     //this.set_CBitStream("s_params", params);
     owner.set_u16("s_caller", caller.getNetworkID());
     owner.set_u8("s_delay", 1);

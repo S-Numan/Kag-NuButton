@@ -246,7 +246,7 @@ void onTick( CRules@ rules )
                 {
                     if(buttons[i].getButtonState() != NuMenu::Disabled && distances[i] < QUICK_PICK_MAX_RANGE)
                     {
-                        buttons[i].sendReleaseCommand();
+                        buttons[i].sendReleaseCommand(KEY_LBUTTON);
                         buttons[i].setButtonState(NuMenu::Released);//Button pressed twice or something. - To future numan.
                         break;
                     }
