@@ -101,6 +101,10 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     button.setCollisionLowerRight(Vec2f(0,0));//Removes the collision box. In most cases.
     button.setCollisionSetter(false);//By default, the button uses a collision box for collisions, not a radius. After changing the collision box, this will prevent the button from changing the collision box back to it's own size again.
 
+    //Keys
+    button.clearKeyCodes();//Clears default key codes used to press the button
+    button.addKeyCode(KEY_LBUTTON);//The left mouse button can press a button
+
     //Text
     button.draw_text = false;//Don't initially draw text.
     //button.reposition_text = false;//Make sure the text is constantly under the button in the correct position when drawing.//Not required.

@@ -85,17 +85,6 @@ void onTick( CRules@ rules )
     u16 i;
     if(blob != null)
     {
-        u16 KEY;
-        
-        if(e_key_release)//On release of the e key
-        {
-            KEY = KEY_KEY_E;
-        }
-        else//What normally happens
-        {
-            KEY = KEY_LBUTTON;
-        }
-
         if(buttons.size() != 0)//Provided there is more than one button.
         {
             for(i = 0; i < buttons.size(); i++)//Tick buttons, then remove buttons if their owner_blobs are dead.
@@ -119,8 +108,8 @@ void onTick( CRules@ rules )
                     mouse_pos = controls.getMouseScreenPos();
                 }
                 
-                if(e_key_release){buttons[i].initial_press = true;}
-                buttons[i].Tick(KEY, mouse_pos, blob_pos);
+                if(e_key_release){ buttons[i].addKeyCode(KEY_KEY_E); buttons[i].initial_press = true;}
+                buttons[i].Tick(mouse_pos, blob_pos);
 
                 if(buttons[i].getKillMenu() && buttons[i].getOwnerBlob() == @null)
                 {
