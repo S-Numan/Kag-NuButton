@@ -2,7 +2,7 @@
 
 #include "StandardRespawnCommand.as";
 #include "GenericButtonCommon.as";
-#include "NumanLib.as";
+#include "NuLib.as";
 
 const string req_class = "required class";
 

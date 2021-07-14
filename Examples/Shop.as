@@ -8,7 +8,7 @@
 #include "MakeCrate.as"
 #include "CheckSpam.as"
 #include "GenericButtonCommon.as"
-#include "NumanLib.as"
+#include "NuLib.as"
 
 void onInit(CBlob@ this)
 {

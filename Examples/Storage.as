@@ -3,7 +3,7 @@
 // Storage.as
 
 #include "GenericButtonCommon.as"
-#include "NumanLib.as"
+#include "NuLib.as"
 
 void onInit(CSprite@ this)
 {
