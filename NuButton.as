@@ -138,7 +138,7 @@ void onTick( CRules@ rules )
                 
                 CBlob@ owner_blob = @buttons[i].getOwnerBlob();
                 
-                if(owner_blob.getWidth() == 0.0f){ Nu::Error("Blob" + i + " is fake null"); continue; }//Can cause instant crashing if blob is destroyed, but not null because kag.
+                if(owner_blob.getWidth() == 0.0f){ Nu::Error("Blob" + i + " is fake null. It has a width of 0.0f. It should not have a width of 0.0f and hold a button"); continue; }//Can cause instant crashing if blob is destroyed, but not null because kag.
 
                 CSprite@ owner_sprite = @owner_blob.getSprite();
                 if(owner_sprite != @null)
