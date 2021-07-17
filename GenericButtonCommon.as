@@ -180,7 +180,7 @@ void setText(NuMenu::MenuButton@ button, string _text, u8 pos = 255)
 
     text.setColor(SColor(255, 255, 255, 255));//The color of the text of the button of the blob of the game of the computer of the screen
     
-    text.setFont("Calibri-Bold");//The font of the text.
+    text.setFont("Calibri-48-Bold");//The font of the text.
 
     button.RepositionText(button.getSize(), pos);
 }
