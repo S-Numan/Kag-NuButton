@@ -176,7 +176,7 @@ void setText(NuMenu::MenuButton@ button, string _text, u8 pos = 255)
 
     NuText@ text = button.setText(_text, pos);
 
-    text.setScale(0.135f);//Scale of text.
+    text.setScale(0.25f);//Scale of text.
 
     text.setColor(SColor(255, 255, 255, 255));//The color of the text of the button of the blob of the game of the computer of the screen
     
