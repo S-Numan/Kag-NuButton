@@ -1,2 +1,2 @@
 # Kag-NuButton
-Requires https://github.com/SadNuman/NuTools
+Depends on https://github.com/SadNuman/NuTools
