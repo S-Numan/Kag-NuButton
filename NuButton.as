@@ -110,6 +110,11 @@ void onTick( CRules@ rules )
                 
                 if(e_key_release){ buttons[i].addKeyCode(KEY_KEY_E); buttons[i].initial_press = true;}
                 buttons[i].Tick(mouse_pos, blob_pos);
+                
+                if(buttons.size() <= i || buttons[i] == @null)//If the button array or this button in specific somehow became null during the tick logic.
+                {
+                    continue;//restart the for loop after this point. The loop will automatically stop if the array is too small.
+                }
 
                 if(buttons[i].getKillMenu() && buttons[i].getOwnerBlob() == @null)
                 {
@@ -235,8 +240,8 @@ void onTick( CRules@ rules )
                 {
                     if(buttons[i].getButtonState() != NuMenu::Disabled && distances[i] < QUICK_PICK_MAX_RANGE)
                     {
-                        buttons[i].sendReleaseCommand(KEY_LBUTTON);
                         buttons[i].setButtonState(NuMenu::Released);//Button pressed twice or something. - To future numan.
+                        buttons[i].sendReleaseCommand(KEY_LBUTTON);
                         break;
                     }
                 }
