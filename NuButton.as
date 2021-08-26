@@ -269,7 +269,7 @@ void onTick( CRules@ rules )
             continue;
         }
 
-        hub.RenderImage(buttons[i].getRenderLayer(), buttons[i].getRenderFunction());
+        hub.RenderImage(buttons[i].getRenderLayer(), buttons[i].getRenderFunction(), buttons[i].isWorldPos());
 
     }
     //Rendering
