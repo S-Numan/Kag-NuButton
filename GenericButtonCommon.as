@@ -108,7 +108,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
     //Text
     button.draw_text = false;//Don't initially draw text.
     //button.reposition_text = false;//Make sure the text is constantly under the button in the correct position when drawing.//Not required.
-    button.default_buffer = 6.0f;//Buffer between bottom of the button and the text. Provided there is text.
+    button.default_buffer = 10.0f;//Buffer between bottom of the button and the text. Provided there is text.
 
     //Sound
     button.menu_sounds_on[NuMenu::JustHover] = "select.ogg";//Button sound played upon just hovering over the button.
@@ -123,12 +123,10 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
         1,//Hover frame 
         1,//Pressing frame
         0);//Image position
-
-    button.setOffset(-(icon.getFrameSize() / 2));
-
-    //Vec2f icon_offset;
-    //Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_offset);
-    //icon.offset = icon_offset;
+        
+    Vec2f icon_offset;
+    Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_offset);
+    icon.offset = icon_offset;
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 
