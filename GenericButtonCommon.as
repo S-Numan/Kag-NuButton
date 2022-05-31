@@ -126,7 +126,7 @@ NuMenu::MenuButton@ CreateButton(CBlob@ this)
         
     Vec2f icon_offset;
     Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_offset);
-    icon.offset = icon_offset;
+    icon.setOffset(icon_offset);
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 
@@ -160,7 +160,7 @@ Nu::NuImage@ addIcon(NuMenu::MenuButton@ button, string icon_path, Vec2f icon_si
 
     Vec2f icon_offset;
     Nu::getPosOnSizeFull(Nu::POSCenter, button.getSize(), icon.getFrameSize(), icon_offset);
-    icon.offset = icon_offset;
+    icon.setOffset(icon_offset);
 
     icon.color_on[NuMenu::Disabled].setAlpha(80);//Get the color of the icon when it is disabled, and change it to fade out when disabled.
 
